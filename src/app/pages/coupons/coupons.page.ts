@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Coupon} from "../../models/coupon";
 import {CouponsService} from "../../services/coupons.service";
+import {NavController, NavParams} from "@ionic/angular";
 
 @Component({
   selector: 'app-coupons',
@@ -12,7 +13,9 @@ export class CouponsPage implements OnInit {
   public coupons: Coupon[];
 
   constructor(
-    private couponService: CouponsService
+    private couponService: CouponsService,
+    private navParams: NavParams,
+    private navController: NavController,
   ) {
     this.coupons = [];
   }
@@ -26,5 +29,10 @@ export class CouponsPage implements OnInit {
 
   changeActive(coupon: Coupon) {
     coupon.active = !coupon.active;
+  }
+
+  goToCard() {
+    this.navParams.data["coupons"] = this.coupons.filter(coupon => coupon.active);
+    this.navController.navigateForward('card-coupon')
   }
 }

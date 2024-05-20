@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-card *ngFor="let coupon of coupons">
+  <ion-card *ngFor="let coupon of coupons; let last=last" [ngClass]="{'margin-last': last}">
     <ion-img [src]="coupon.img"></ion-img>
 
     <ion-card-header>
@@ -22,4 +22,11 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
+
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="goToCard()">
+      <ion-icon name="card-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
