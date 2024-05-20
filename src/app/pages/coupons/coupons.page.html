@@ -1,10 +1,14 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" *ngIf="!showCamera">
   <ion-toolbar>
     <ion-title>Cupones</ion-title>
+
+    <ion-item slot="end" lines="none" (click)="startCamera()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="!showCamera">
 
   <ion-card *ngFor="let coupon of coupons; let last=last" [ngClass]="{'margin-last': last}">
     <ion-img [src]="coupon.img"></ion-img>
@@ -30,3 +34,9 @@
   </ion-fab>
 
 </ion-content>
+
+<ion-fab horizontal="start" vertical="bottom" slot="fixed" *ngIf="showCamera">
+  <ion-fab-button (click)="closeCamera()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
